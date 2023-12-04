@@ -27,4 +27,10 @@ if [[ "$#" > 0 && ( "$1" = "-h" || "$1" = "--help" ) ]]; then
     exit 1
 fi;
 
-"$CXX" $CXXFLAGS $CXXFLAGS_WARN -O0 -ggdb -Werror "$1.cpp" -o "$NAME" $LDFLAGS
+if [[ "$#" = 0 ]]; then
+	MAIN=$(ls *.cpp | sort | tail -n1)
+else
+	MAIN=$1.cpp
+fi;
+
+"$CXX" $CXXFLAGS $CXXFLAGS_WARN -O0 -ggdb -Werror "$MAIN" -o "$NAME" $LDFLAGS

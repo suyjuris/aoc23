@@ -22,7 +22,7 @@ load_paths = {
  { load_paths_custom, .os = "mac"  },
 };
 
-build_debug = "./build.sh 1";
+build_debug = "./build.sh";
 run = "./aoc";
 
 command_list = {

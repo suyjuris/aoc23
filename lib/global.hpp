@@ -433,6 +433,16 @@ void array_prepend_zero(Array_dyn<T>* arr, s64 n) {
     arr->size += n;
 }
 
+template <typename T>
+bool array_startswith(Array_t<T> a, Array_t<T> b) {
+    return a.size >= b.size and array_equal(array_subarray(a, 0, b.size), b);
+}
+template <typename T>
+bool array_endswith(Array_t<T> a, Array_t<T> b) {
+    return a.size >= b.size and array_equal(array_subarray(a, a.size-b.size), b);
+}
+
+
 // Decode the first unicode codepoint in buf, return the number of bytes it is long. The result
 // value of the codepoint is written into c_out .
 s64 utf8_decode(Array_t<u8> buf, u32* c_out = nullptr, bool* err = nullptr) {
