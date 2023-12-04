@@ -1,0 +1,42 @@
+version(1);
+project_name = "aoc23";
+
+patterns = {
+"*.c",
+"*.cpp",
+"*.h",
+"*.hpp",
+"*.sh",
+"*.4coder",
+"*.txt",
+};
+blacklist_patterns = {
+".*",
+};
+load_paths_custom = {
+ {".", "lib"},
+};
+load_paths = {
+ { load_paths_custom, .os = "win"  },
+ { load_paths_custom, .os = "linux"},
+ { load_paths_custom, .os = "mac"  },
+};
+
+build_debug = "./build.sh 1";
+run = "./aoc";
+
+command_list = {
+ { .name = "build",
+   .out = "*compile*", .footer_panel = true, .save_dirty_files = true, .cursor_at_end = false,
+   .cmd = { {build_debug, .os ="win"  },
+            {build_debug, .os ="linux"},
+            {build_debug, .os ="mac"  }, }, },
+ { .name = "run",
+   .out = "*run*", .footer_panel = true, .save_dirty_files = false, .cursor_at_end = false,
+   .cmd = { {run, .os ="win"  },
+            {run, .os ="linux"},
+            {run, .os ="mac"  }, }, },
+};
+
+fkey_command[1] = "build";
+fkey_command[2] = "run";
