@@ -23,7 +23,7 @@ load_paths = {
 };
 
 build_debug = "./build.sh";
-run = "./aoc";
+run = "./build.sh && ./aoc";
 
 command_list = {
  { .name = "build",
@@ -32,7 +32,7 @@ command_list = {
             {build_debug, .os ="linux"},
             {build_debug, .os ="mac"  }, }, },
  { .name = "run",
-   .out = "*run*", .footer_panel = true, .save_dirty_files = false, .cursor_at_end = false,
+   .out = "*run*", .footer_panel = true, .save_dirty_files = true, .cursor_at_end = false,
    .cmd = { {run, .os ="win"  },
             {run, .os ="linux"},
             {run, .os ="mac"  }, }, },

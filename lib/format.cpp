@@ -60,7 +60,7 @@ Array_t<u8> format_uint(s64 val, Array_dyn<u8>* into, u8 base=10) {
         if (not val) break;
     }
     auto arr = array_subarray(*into, index);
-    for (s64 i = 0; i < (arr.size-1) / 2; ++i)
+    for (s64 i = 0; i < arr.size / 2; ++i)
         simple_swap(&arr[i], &arr[arr.size-1 - i]);
     return arr;
 }
