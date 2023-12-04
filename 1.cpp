@@ -15,6 +15,8 @@ int main() {
             last = val;
         } else if (c == '\n') {
             sum += 10*first + last;
+            first = -1;
+            last = -1;
         }
     }
     format_print("%d\n", sum);
