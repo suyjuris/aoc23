@@ -29,6 +29,8 @@ int main() {
             number = 0;
         } else if (c == '|') {
             state = 1;
+        } else if (c == ':') {
+            number = 0;
         }
         if (c == '\n') {
             if (winning_count > 0) {
