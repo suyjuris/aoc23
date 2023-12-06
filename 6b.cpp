@@ -5,7 +5,7 @@
 #include "lib/number.cpp"
 #include "lib/algorithm.cpp"
 
-void parse_one_int_line(Array_t<u8> text, s64* inout_index, Array_dyn<s64>* out) {
+void parse_one_int_line(Array_t<u8> text, s64* inout_index, s64* out) {
     s64 number = 0;
     s64 i;
     for (i = *inout_index; i < text.size; ++i) {
@@ -13,7 +13,7 @@ void parse_one_int_line(Array_t<u8> text, s64* inout_index, Array_dyn<s64>* out)
         if ('0' <= c and c <= '9') {
             number = 10*number + (c - '0');
         } else if (c == '\n') {
-            array_push_back(out, number);
+            *out = number;
             ++i;
             break;
         }
@@ -24,27 +24,19 @@ int main() {
     auto arr = array_load_from_file("input/6"_arr);
     
     s64 index = 0;
-    Array_dyn<s64> durations, distances;
-    parse_one_int_line(arr, &index, &durations);
-    parse_one_int_line(arr, &index, &distances);
+    s64 duration, distance;
+    parse_one_int_line(arr, &index, &duration);
+    parse_one_int_line(arr, &index, &distance);
     
-    assert(durations.size == distances.size);
+    double t = duration;
+    double d = distance;
     
-    s64 prod = 1;
-    for (s64 i = 0; i < durations.size; ++i) {
-        double t = durations[i];
-        double d = distances[i];
-        
-        double x0 = (t-sqrt(t*t-4*d)) / 2;
-        double x1 = (t+sqrt(t*t-4*d)) / 2;
-        
-        if (x0 < 0) x0 = 0;
-        if (x1 < 0) x1 = 0;
-        s64 count = floor(nextafter(x1, x1-1)) - ceil(nextafter(x0, x0+1)) + 1;
-        prod *= count;
-        
-        printf("%f %f %lld\n", x0, x1, count);
-    }
+    double x0 = (t-sqrt(t*t-4*d)) / 2;
+    double x1 = (t+sqrt(t*t-4*d)) / 2;
     
-    format_print("%d\n", prod);
+    if (x0 < 0) x0 = 0;
+    if (x1 < 0) x1 = 0;
+    s64 count = floor(nextafter(x1, x1-1)) - ceil(nextafter(x0, x0+1)) + 1;
+    
+    format_print("%d\n", count);
 }
