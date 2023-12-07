@@ -6,7 +6,7 @@
 #include "lib/algorithm.cpp"
 
 struct Hand {
-    u8 val = 0;
+    u64 val = 0;
     s64 bid = 0;
 };
 
@@ -66,12 +66,13 @@ int main() {
         }
         
         hand.val = 0ull
-            | cards[0] << 24
-            | cards[1] << 20
-            | cards[2] << 16
-            | cards[3] << 12
-            | cards[4] <<  8
-            | type;
+            | (u64)type << 28
+            | (u64)cards[0] << 24
+            | (u64)cards[1] << 20
+            | (u64)cards[2] << 16
+            | (u64)cards[3] << 12
+            | (u64)cards[4] <<  8
+            ;
         
         hand.bid = 0;
         while ('0' <= arr[index] and arr[index] <= '9') {
