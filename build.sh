@@ -28,7 +28,7 @@ if [[ "$#" > 0 && ( "$1" = "-h" || "$1" = "--help" ) ]]; then
 fi;
 
 if [[ "$#" = 0 ]]; then
-	MAIN=$(ls *.cpp | sort | tail -n1)
+	MAIN=$(ls *.cpp | sort -t. -k1n | tail -n1)
 else
 	MAIN=$1.cpp
 fi;
