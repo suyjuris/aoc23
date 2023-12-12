@@ -50,7 +50,7 @@ s64 count_possibilities(Array_t<u8> springs, Array_t<s64> groups) {
             if (springs[j] == '.') possible = false;
         }
         if (notlast and springs[i+n] == '#') possible = false;
-        if (possible) {
+        if (not possible) {
             count += count_possibilities(array_subarray(springs, i+n+notlast), array_subarray(groups, 1));
         }
         
