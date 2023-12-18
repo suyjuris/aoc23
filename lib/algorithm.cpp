@@ -60,12 +60,12 @@ void array_reverse(Array_t<T>* arr) {
 template <typename T, typename Func>
 struct Heap {
     Array_dyn<T> arr;
-    Func&& func;
+    Func func;
 };
 
 template <typename T, typename Func>
 Heap<T, Func> heap_init(Func&& func) {
-    return {{}, func};
+    return Heap<T, Func> {Array_dyn<T> {}, func};
 }
 
 template <typename T, typename Func>
@@ -91,7 +91,9 @@ T heap_pop(Heap<T, Func>* heap) {
     T result = heap->arr[0];
     heap->arr[0] = heap->arr.back();
     --heap->arr.size;
-    _heap_bubble_down(heap->arr, 0, heap->func);
+    if (heap->arr.size) {
+        _heap_bubble_down(heap->arr, 0, heap->func);
+    }
     return result;
 }
 
@@ -102,7 +104,7 @@ void heap_push(Heap<T, Func>* heap, T el) {
     auto i_val = heap->func(el);
     while (i > 0) {
         s64 ip = (i-1) / 2;
-        auto ip_val = heap->arr[ip];
+        auto ip_val = heap->func(heap->arr[ip]);
         if (ip_val < i_val) {
             simple_swap(&heap->arr[i], &heap->arr[ip]);
             i_val = ip_val;

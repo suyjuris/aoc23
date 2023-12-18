@@ -63,7 +63,6 @@ int main() {
             sum = entry.dist;
             break;
         }
-        //format_print("%d,%d %d %d -> %d\n", entry.node.x, entry.node.y, entry.node.d, entry.node.len, entry.dist);
         
         for (u8 d = 0; d < 4; ++d) {
             if (d == (entry.node.d ^ 2)) continue;
