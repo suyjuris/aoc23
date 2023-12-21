@@ -107,7 +107,6 @@ void heap_push(Heap<T, Func>* heap, T el) {
         auto ip_val = heap->func(heap->arr[ip]);
         if (ip_val < i_val) {
             simple_swap(&heap->arr[i], &heap->arr[ip]);
-            i_val = ip_val;
             i = ip;
         } else break;
     }
